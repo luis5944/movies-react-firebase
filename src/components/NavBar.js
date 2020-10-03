@@ -44,7 +44,7 @@ export const NavBar = ({
       // No user is signed in.
     }
   });
-
+ 
   return (
     <form onSubmit={handleSubmit}>
       <header>
@@ -52,7 +52,12 @@ export const NavBar = ({
           <i
             className="fas fa-ticket-alt fa-4x"
             onClick={() => {
-              window.location.reload();
+             if(window.location.pathname === "/watchlist"){
+              window.location = "/";
+             }else {
+               window.location.reload();
+
+             }
             }}
           ></i>
         </NavLink>
