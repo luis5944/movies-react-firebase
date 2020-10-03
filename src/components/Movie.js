@@ -52,8 +52,8 @@ export const Movie = ({ data }) => {
       return;
     }
     await db.doc(`${user.uid}/movies/favourites/${data.id}`).delete();
-    // window.location = "/watchlist";
-    window.location.reload();
+    window.location = "/watchlist";
+    // window.location.reload();
   };
 
   return (
