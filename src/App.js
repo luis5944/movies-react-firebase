@@ -51,6 +51,8 @@ function App() {
           setIsAuth={setIsAuth}
           isAuth={isAuth}
         />
+        <div className="main">
+
         <Switch>
           <Route exact path="/">
             <Movies
@@ -68,6 +70,7 @@ function App() {
             <WatchList />
           </Route>
         </Switch>
+        </div>
       </Router>
     </UserProvider>
   );

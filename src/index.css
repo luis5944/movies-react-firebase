@@ -194,6 +194,54 @@ button:active {
   font-size: 4em;
 }
 
+.btn-genre {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #0b0c10;
+  padding: 0;
+}
+.btn-genre button {
+  padding: 15px 25px;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #1f2833;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #45a29e;
+  margin: 20px;
+  padding: 10px;
+}
+
+nav {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+nav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background: #ddd;
+  color: black;
+}
+.main {
+  margin-top: 195px;
+}
+
 @media only screen and (max-width: 600px) {
   header {
     background-color: #1f2833;
@@ -208,5 +256,11 @@ button:active {
   header .nav-item {
     padding-top: 10px;
   }
- 
+
+  nav {
+    position: relative;
+  }
+  .main {
+    margin-top: 0px;
+  }
 }
