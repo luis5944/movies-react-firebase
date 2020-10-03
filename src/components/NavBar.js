@@ -49,7 +49,12 @@ export const NavBar = ({
     <form onSubmit={handleSubmit}>
       <header>
         <NavLink activeClassName="active" className="nav-i" exact to="/">
-          <i className="fas fa-ticket-alt fa-4x"></i>
+          <i
+            className="fas fa-ticket-alt fa-4x"
+            onClick={() => {
+              window.location.reload();
+            }}
+          ></i>
         </NavLink>
 
         <input
