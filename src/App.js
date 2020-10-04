@@ -15,6 +15,8 @@ function App() {
   const [isSearching, setIsSearching] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
 
+  
+
   useEffect(() => {
     const GETMOVIES = async () => {
       const resp = await fetch(FEATURED_API + page);
@@ -23,6 +25,7 @@ function App() {
       setMovies(data.results);
     };
     GETMOVIES();
+    
   }, [page]);
 
   const gotToTop = () => {
@@ -50,26 +53,27 @@ function App() {
           setIsSearching={setIsSearching}
           setIsAuth={setIsAuth}
           isAuth={isAuth}
+          
         />
         <div className="main">
-
-        <Switch>
-          <Route exact path="/">
-            <Movies
-              movies={movies}
-              isSearching={isSearching}
-              page={page}
-              handleNextPage={handleNextPage}
-              handlePrevPage={handlePrevPage}
-            />
-          </Route>
-          <Route exact path="/login">
-            <Login isAuth={isAuth} setIsAuth={setIsAuth} />
-          </Route>
-          <Route exact path="/watchlist">
-            <WatchList />
-          </Route>
-        </Switch>
+          <Switch>
+            <Route exact path="/">
+              <Movies
+                movies={movies}
+                isSearching={isSearching}
+                page={page}
+                handleNextPage={handleNextPage}
+                handlePrevPage={handlePrevPage}
+               
+              />
+            </Route>
+            <Route exact path="/login">
+              <Login isAuth={isAuth} setIsAuth={setIsAuth}  />
+            </Route>
+            <Route exact path="/watchlist">
+              <WatchList />
+            </Route>
+          </Switch>
         </div>
       </Router>
     </UserProvider>

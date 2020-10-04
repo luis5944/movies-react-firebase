@@ -18,7 +18,7 @@ export const Login = ({ isAuth, setIsAuth }) => {
       name: userCredential.user.displayName,
     });
   };
-
+  
   const history = useHistory();
   const handleLogin = () => {
     googleLogin();

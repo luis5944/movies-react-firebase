@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { firebase } from "../firebase/firebase-config";
 import { Button, Menu, MenuItem } from "@material-ui/core";
@@ -12,6 +12,7 @@ export const NavBar = ({
   setIsSearching,
   setIsAuth,
   isAuth,
+  isOnMovies,
 }) => {
   const [search, setSearch] = useState("");
   const { setUser } = useContext(UserContext);
@@ -24,7 +25,7 @@ export const NavBar = ({
     { id: 53, name: "Thriller" },
     { id: 878, name: "Sciencie Fiction" },
   ];
-
+  const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (search.trim().length <= 0) {
@@ -40,6 +41,7 @@ export const NavBar = ({
     };
     APISEARCH();
     setGenre("");
+    history.push("/");
   };
 
   const handleChange = (e) => {
@@ -78,8 +80,9 @@ export const NavBar = ({
         setIsSearching(true);
       };
       APISEARCH();
+      history.push("/");
     }
-  }, [page, setIsSearching, setMovies, genre]);
+  }, [page, setIsSearching, setMovies, genre, history]);
 
   const cleanGenre = () => {
     setGenre("");

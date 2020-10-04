@@ -7,6 +7,7 @@ export const WatchList = () => {
   const [favMovies, setFavMovies] = useState([]);
   const { user } = useContext(UserContext);
 
+
   useEffect(() => {
     const favs = async () => {
       const favsGet = await loadFavourites(user.uid);
