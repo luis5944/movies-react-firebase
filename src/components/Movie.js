@@ -90,7 +90,7 @@ export const Movie = ({ data }) => {
       return;
     }
     await db.doc(`${user.uid}/movies/favourites/${data.id}`).delete();
-    window.location = "/";
+    window.location = "/watchlist";
     // window.location.reload();
   };
 
