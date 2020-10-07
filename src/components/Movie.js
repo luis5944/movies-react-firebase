@@ -20,6 +20,7 @@ export const Movie = ({ data }) => {
       `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${title}+${year}+trailer&type=video&key=${API}`
     );
     const data = await resp.json();
+    console.log(data);
     setYoutubeId(data.items[0].id.videoId);
   };
 
@@ -152,6 +153,7 @@ export const Movie = ({ data }) => {
             aria-describedby="alert-dialog-description"
           >
             <DialogContent>
+            <div class="embed-container">
               <iframe
                 title={title}
                 frameBorder="0"
@@ -163,6 +165,7 @@ export const Movie = ({ data }) => {
                 type="text/html"
                 src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
               ></iframe>
+              </div>
             </DialogContent>
           </Dialog>
         </div>
