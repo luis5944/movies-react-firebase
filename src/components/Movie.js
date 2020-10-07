@@ -20,7 +20,7 @@ export const Movie = ({ data }) => {
       `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${title}+${year}+trailer&type=video&key=${API}`
     );
     const data = await resp.json();
-    console.log(data);
+    
     setYoutubeId(data.items[0].id.videoId);
   };
 
