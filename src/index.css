@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
-
 * {
   box-sizing: border-box;
 }
@@ -241,6 +240,13 @@ nav a:hover {
 }
 .main {
   margin-top: 195px;
+}
+
+.mierda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 @media only screen and (max-width: 600px) {
