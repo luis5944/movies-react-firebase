@@ -6,28 +6,26 @@ import { Button, Dialog, DialogContent } from "@material-ui/core";
 
 export const Movie = ({ data }) => {
   const IMAGES_API = `https://image.tmdb.org/t/p/w1280/`;
-
-  const { title, poster_path, overview, vote_average, release_date } = data;
-
+  const { id, title, poster_path, overview, vote_average, release_date } = data;
   const year = release_date ? release_date.split("-")[0] : "";
-
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [youtubeId, setYoutubeId] = useState("");
-  const API = "AIzaSyAacj2u6g9LoB1gtzLh21k-SHALMZ_ml_w";
 
-  const movieApi = async () => {
+  const videoYoutube = async () => {
     const resp = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${title}+${year}+trailer&type=video&key=${API}`
+      `http://api.themoviedb.org/3/movie/${id}/videos?api_key=5c9963d2881951727e213403f42041b2`
     );
     const data = await resp.json();
-    
-    setYoutubeId(data.items[0].id.videoId);
+    console.log(data);
+    if (data.results.length === 0) {
+      setYoutubeId("");
+    } else {
+      setYoutubeId(data.results[0].key);
+    }
   };
-
   const handleClickOpen = () => {
+    videoYoutube();
     setOpen(true);
-    movieApi();
-    console.log(youtubeId);
   };
 
   const handleClose = () => {
@@ -92,7 +90,7 @@ export const Movie = ({ data }) => {
       return;
     }
     await db.doc(`${user.uid}/movies/favourites/${data.id}`).delete();
-    window.location = "/";
+    window.location = "/watchlist";
     // window.location.reload();
   };
 
@@ -135,39 +133,43 @@ export const Movie = ({ data }) => {
             />
           )}
 
-          {/* <a
-            href={`https://www.youtube.com/results?search_query=${title} ${year}+movie`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={require("../resource/mult.ico")} alt={title} />
-          </a> */}
+          <div>
+            <Button variant="text" color="primary" onClick={handleClickOpen}>
+              <img src={require("../resource/mult.ico")} alt={title} />
+            </Button>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogContent>
+                <iframe
+                  title={title}
+                  allowFullScreen="allowfullscreen"
+                  frameBorder="0"
+                  scrolling="no"
+                  marginHeight="0"
+                  marginWidth="0"
+                  width="560.7"
+                  height="315"
+                  type="text/html"
+                  src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
+                ></iframe>
 
-          <Button variant="text" color="primary" onClick={handleClickOpen}>
-            <img src={require("../resource/mult.ico")} alt={title} />
-          </Button>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogContent>
-            <div class="embed-container">
-              <iframe
-                title={title}
-                frameBorder="0"
-                scrolling="no"
-                marginHeight="0"
-                marginWidth="0"
-                width="560.7"
-                height="315"
-                type="text/html"
-                src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
-              ></iframe>
-              </div>
-            </DialogContent>
-          </Dialog>
+                {/* <div>
+                    <h1>I can't find it. Check this link</h1>
+                    <a
+                      href={`https://www.youtube.com/results?search_query=${title} ${year}+movie`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img src={require("../resource/mult.ico")} alt={title} />
+                    </a>
+                  </div> */}
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </div>
     </div>
