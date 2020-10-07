@@ -13,7 +13,7 @@ export const Movie = ({ data }) => {
 
   const videoYoutube = async () => {
     const resp = await fetch(
-      `http://api.themoviedb.org/3/movie/${id}/videos?api_key=5c9963d2881951727e213403f42041b2`
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=5c9963d2881951727e213403f42041b2`
     );
     const data = await resp.json();
     console.log(data);

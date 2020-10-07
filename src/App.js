@@ -70,7 +70,7 @@ function App() {
             <Route exact path="/login">
               <Login isAuth={isAuth} setIsAuth={setIsAuth}  />
             </Route>
-            <Route exact path="/watchlist">
+            <Route  path="/watchlist">
               <WatchList />
             </Route>
           </Switch>
