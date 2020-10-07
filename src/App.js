@@ -7,7 +7,7 @@ import { NavBar } from "./components/NavBar";
 import UserProvider from "./context/UserContext";
 
 const API_KEY = "5c9963d2881951727e213403f42041b2";
-const FEATURED_API = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=`;
+const POPULAR_API = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=`;
 function App() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const GETMOVIES = async () => {
-      const resp = await fetch(FEATURED_API + page);
+      const resp = await fetch(POPULAR_API + page);
       const data = await resp.json();
 
       setMovies(data.results);

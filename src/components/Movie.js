@@ -40,7 +40,22 @@ export const Movie = ({ data }) => {
       vote_average,
       release_date,
     };
+    let existMovieOnWathList = false;
 
+    await db
+      .collection(`${user.uid}/movies/favourites`)
+      .where("title", "==", newFavouriteMovie.title)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          existMovieOnWathList = true;
+        });
+      });
+
+    if (existMovieOnWathList) {
+      Swal.fire(":(", `${title} is already on your watchlist`, "error");
+      return;
+    }
     Swal.fire("Added", `${title} added to your watchlist`, "success");
 
     await db.collection(`${user.uid}/movies/favourites`).add(newFavouriteMovie);
