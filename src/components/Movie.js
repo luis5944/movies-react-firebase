@@ -2,21 +2,29 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
-import { Button, Dialog, DialogContent } from "@material-ui/core";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@material-ui/core";
 
 export const Movie = ({ data }) => {
   const IMAGES_API = `https://image.tmdb.org/t/p/w1280/`;
   const { id, title, poster_path, overview, vote_average, release_date } = data;
   const year = release_date ? release_date.split("-")[0] : "";
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const [youtubeId, setYoutubeId] = useState("");
+  const [torrents, setTorrents] = useState([]);
 
   const videoYoutube = async () => {
     const resp = await fetch(
       `https://api.themoviedb.org/3/movie/${id}/videos?api_key=5c9963d2881951727e213403f42041b2`
     );
     const data = await resp.json();
-    
+
     if (data.results.length === 0) {
       setYoutubeId("");
     } else {
@@ -28,8 +36,27 @@ export const Movie = ({ data }) => {
     setOpen(true);
   };
 
+  const handleClickOpen2 = () => {
+    const apiYTS = async () => {
+      const resp = await fetch(
+        `https://yts.mx/api/v2/list_movies.json?query_term=2020&query_term=${title}+${year}`
+      );
+      const data = await resp.json();
+
+      if (data.data.movies) {
+        setTorrents(data.data.movies[0].torrents);
+      }
+    };
+
+    apiYTS();
+    setOpen2(true);
+  };
+
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleClose2 = () => {
+    setOpen2(false);
   };
 
   const setVoteClass = (vote) => {
@@ -90,9 +117,11 @@ export const Movie = ({ data }) => {
       return;
     }
     await db.doc(`${user.uid}/movies/favourites/${data.id}`).delete();
-    window.location = "/watchlist";
-    // window.location.reload();
+    // window.location = "/watchlist";
+    window.location.reload();
   };
+
+  //API YTS
 
   return (
     <div className="movie">
@@ -112,13 +141,60 @@ export const Movie = ({ data }) => {
         <h2>Storyline:</h2>
         <p>{overview}</p>
         <div className="movie-links">
-          <a
+          <div>
+            <Button variant="text" color="primary" onClick={handleClickOpen2}>
+              <img src={require("../resource/ut.ico")} alt={title} />
+            </Button>
+            <Dialog
+              open={open2}
+              onClose={handleClose2}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Torrents from YTS"}
+              </DialogTitle>
+              <DialogContent>
+                <div className="links-torrent">
+                  <DialogContentText
+                    id="alert-dialog-description"
+                    component="div"
+                  >
+                    {torrents.map((torrent) => {
+                      return (
+                        <ul key={torrent.hash}>
+                          <li>
+                            <a
+                              href={`magnet:?xt=urn:btih:${torrent.hash}&dn=Url+Encoded+Movie+Name&tr=http://track.one:1234/announce&tr=udp://track.two:80`}
+                            >
+                              <i className="fas fa-magnet">
+                                <span> {`${torrent.quality}`}</span>
+                              </i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href={torrent.url}>
+                              <i className="fas fa-download">
+                                <span> {`${torrent.quality}`}</span>
+                              </i>
+                            </a>
+                          </li>
+                        </ul>
+                      );
+                    })}
+                  </DialogContentText>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          {/* <a
             href={`https://yts.mx/browse-movies/${title} ${year}/all/all/0/latest/0/all`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <img src={require("../resource/ut.ico")} alt={title} />
-          </a>
+          </a> */}
           {window.location.pathname === "/watchlist" ? (
             <img
               src={require("../resource/dwatch.ico")}

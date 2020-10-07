@@ -242,7 +242,27 @@ nav a:hover {
   margin-top: 195px;
 }
 
-
+.links-torrent a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+  text-decoration: none;
+}
+.links-torrent span,
+.links-torrent i {
+  color: black;
+}
+.links-torrent ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 10px;
+}
 
 @media only screen and (max-width: 600px) {
   header {
@@ -265,7 +285,7 @@ nav a:hover {
   .main {
     margin-top: 0px;
   }
- 
+
   iframe {
     width: 100%;
     height: 300px;
