@@ -264,6 +264,15 @@ nav a:hover {
   padding-bottom: 10px;
 }
 
+hr {
+  border:1px outset;
+  background-color: #0b0c10;
+  color: #0b0c10;
+  height: 3px;
+  width: 50%;
+
+}
+
 @media only screen and (max-width: 600px) {
   header {
     background-color: #1f2833;

@@ -121,8 +121,6 @@ export const Movie = ({ data }) => {
     window.location.reload();
   };
 
-  
-
   return (
     <div className="movie">
       {poster_path !== null ? (
@@ -160,6 +158,7 @@ export const Movie = ({ data }) => {
                     id="alert-dialog-description"
                     component="div"
                   >
+                    <hr></hr>
                     {torrents.map((torrent) => {
                       return (
                         <ul key={torrent.hash}>
@@ -168,17 +167,25 @@ export const Movie = ({ data }) => {
                               href={`magnet:?xt=urn:btih:${torrent.hash}&dn=Url+Encoded+Movie+Name&tr=http://track.one:1234/announce&tr=udp://track.two:80`}
                             >
                               <i className="fas fa-magnet">
-                                <span> {`${torrent.quality} ${torrent.type}`}</span>
+                                <span>
+                                  {" "}
+                                  {`${torrent.quality} ${torrent.type}`}
+                                </span>
                               </i>
                             </a>
                           </li>
+
                           <li>
                             <a href={torrent.url}>
                               <i className="fas fa-download">
-                                <span> {`${torrent.quality} ${torrent.type}`}</span>
+                                <span>
+                                  {" "}
+                                  {`${torrent.quality} ${torrent.type}`}
+                                </span>
                               </i>
                             </a>
                           </li>
+                          <hr></hr>
                         </ul>
                       );
                     })}
