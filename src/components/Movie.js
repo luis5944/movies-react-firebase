@@ -17,7 +17,7 @@ export const Movie = ({ data }) => {
 
   const movieApi = async () => {
     const resp = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${title}+${year}+movie&type=video&key=${API}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${title}+${year}+trailer&type=video&key=${API}`
     );
     const data = await resp.json();
     setYoutubeId(data.items[0].id.videoId);
