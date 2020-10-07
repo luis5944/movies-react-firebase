@@ -16,7 +16,7 @@ export const Movie = ({ data }) => {
       `https://api.themoviedb.org/3/movie/${id}/videos?api_key=5c9963d2881951727e213403f42041b2`
     );
     const data = await resp.json();
-    console.log(data);
+    
     if (data.results.length === 0) {
       setYoutubeId("");
     } else {
@@ -90,7 +90,7 @@ export const Movie = ({ data }) => {
       return;
     }
     await db.doc(`${user.uid}/movies/favourites/${data.id}`).delete();
-    window.location = "/watchlist";
+    window.location = "/";
     // window.location.reload();
   };
 
