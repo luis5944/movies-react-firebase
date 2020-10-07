@@ -121,7 +121,7 @@ export const Movie = ({ data }) => {
     window.location.reload();
   };
 
-  //API YTS
+  
 
   return (
     <div className="movie">
@@ -168,14 +168,14 @@ export const Movie = ({ data }) => {
                               href={`magnet:?xt=urn:btih:${torrent.hash}&dn=Url+Encoded+Movie+Name&tr=http://track.one:1234/announce&tr=udp://track.two:80`}
                             >
                               <i className="fas fa-magnet">
-                                <span> {`${torrent.quality}`}</span>
+                                <span> {`${torrent.quality} ${torrent.type}`}</span>
                               </i>
                             </a>
                           </li>
                           <li>
                             <a href={torrent.url}>
                               <i className="fas fa-download">
-                                <span> {`${torrent.quality}`}</span>
+                                <span> {`${torrent.quality} ${torrent.type}`}</span>
                               </i>
                             </a>
                           </li>
