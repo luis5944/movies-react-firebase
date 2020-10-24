@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 
 export const Movie = ({ data }) => {
+ 
   const IMAGES_API = `https://image.tmdb.org/t/p/w1280/`;
   const { id, title, poster_path, overview, vote_average, release_date } = data;
   const year = release_date ? release_date.split("-")[0] : "";

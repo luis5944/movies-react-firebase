@@ -9,6 +9,7 @@ import UserProvider from "./context/UserContext";
 const API_KEY = "5c9963d2881951727e213403f42041b2";
 const POPULAR_API = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=`;
 function App() {
+  console.log(process.env);
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
@@ -26,8 +27,10 @@ function App() {
   }, [page]);
 
   const gotToTop = () => {
-    document.body.scrollTop = 0; //Safari
-    document.documentElement.scrollTop = 0; //Rest
+  
+      document.body.scrollTop = 0; //Safari
+      document.documentElement.scrollTop = 0; //Rest
+ 
   };
   const handleNextPage = () => {
     setPage(page + 1);

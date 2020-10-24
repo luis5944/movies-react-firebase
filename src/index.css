@@ -3,6 +3,9 @@
 * {
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 #root {
   display: flex;
   flex-direction: column;
@@ -265,12 +268,11 @@ nav a:hover {
 }
 
 hr {
-  border:1px outset;
+  border: 1px outset;
   background-color: #0b0c10;
   color: #0b0c10;
   height: 3px;
   width: 50%;
-
 }
 
 @media only screen and (max-width: 600px) {
